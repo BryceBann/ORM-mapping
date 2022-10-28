@@ -20,3 +20,7 @@ product-routes
 categorey routes
 
 - seems all the same just slightly different routes for gathering data
+
+
+-work on modules adding id and names
+
