@@ -24,3 +24,9 @@ categorey routes
 
 -work on modules adding id and names
 
+find one for sure
+arrow function the .catch err
+tag and products for category id
+
+follow tag-routes for the create update and delete
+

@@ -17,16 +17,14 @@ router.get('/', (req, res) => {
   })
   .then(dbTagData => res.json(dbTagData))
   .catch(err => {
-    console.log(err);
     res.status(500).json(err);
   });
-
 });
 
 router.get('/:id', (req, res) => {
   // find a single tag by its `id`
   // be sure to include its associated Product data
-  Tag.findByPk({
+  Tag.findOne({
     where: {
       id: req.params.id
     },
@@ -34,7 +32,7 @@ router.get('/:id', (req, res) => {
     include: [
       {
         model: Product,
-        attributes: ['id', 'product_name', 'price', 'stock', 'categpry_id']
+        attributes: ['id', 'product_name', 'price', 'stock', 'category_id']
       }
     ]
   })
@@ -56,7 +54,7 @@ router.post('/', (req, res) => {
   Tag.create({
     tag_name: req.body.tag_name
   })
-  .then(dbTagData => res.json(dbTagData))
+  .then(tagDB => res.json(tagDB))
   .catch(err => {
     console.log(err);
     res.status(500).json(err);
@@ -70,12 +68,12 @@ router.put('/:id', (req, res) => {
       id: req.params.id
     }
   })
-  .then(dbTagData => {
-    if (!dbTagData[0]) {
+  .then(tagDB => {
+    if (!tagDB[0]) {
       res.status(404).json({message: 'No tag for this id'});
       return;
     }
-    res.json(dbTagData);
+    res.json(tagDB);
   })
   .catch(err => {
     console.log(err);
@@ -90,12 +88,12 @@ router.delete('/:id', (req, res) => {
       id: req.params.id
     }
   }) 
-  .then(dbTagData => {
-    if(!dbTagData) {
+  .then(tagDB => {
+    if(!tagDB) {
       res.status(404).json({message: 'No tag for this id'});
       return;
     }
-    res.json(dbTagData);
+    res.json(tagDB);
   })
   .catch(err => {
     console.log(err);
