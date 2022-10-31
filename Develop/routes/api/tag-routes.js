@@ -15,7 +15,7 @@ router.get('/', (req, res) => {
       }
     ]
   })
-  .then(dbTagData => res.json(dbTagData))
+  .then(tagDB => res.json(tagDB))
   .catch(err => {
     res.status(500).json(err);
   });
@@ -36,15 +36,14 @@ router.get('/:id', (req, res) => {
       }
     ]
   })
-  .then(dbTagData => {
-    if(!dbTagData) {
+  .then(tagDB => {
+    if(!tagDB) {
       res.status(404).json({message: 'No tag for this id'})
       return;
     }
-    res.json(dbTagData);
+    res.json(tagDB);
   })
   .catch(err => {
-    console.log(err);
     res.status(500).json(err);
   });
 });
@@ -56,7 +55,6 @@ router.post('/', (req, res) => {
   })
   .then(tagDB => res.json(tagDB))
   .catch(err => {
-    console.log(err);
     res.status(500).json(err);
   });
 });
