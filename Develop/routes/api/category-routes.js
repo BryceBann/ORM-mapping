@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
     where: {
       id: req.params.id
     },
-    attributes: ['id', 'categoty_name'],
+    attributes: ['id', 'category_name'],
     include: [
       {
         model: Product,
@@ -40,12 +40,13 @@ router.get('/:id', (req, res) => {
   })
   .then(dbCategoryData => {
     if(!dbCategoryData) {
-      res.status(404).json({messgae: 'No product for this id'})
+      res.status(404).json({messgae: 'No category for this id'});
       return;
     }
-    res.json(dbCategoryData)
+    res.json(dbCategoryData);
   })
   .catch(err => {
+    console.log(err);
     res.status(500).json(err);
   });
 });
@@ -53,12 +54,12 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new category
   Category.create({
-    category_name: req.body.Category_name
+    category_name: req.body.category_name
   })
   .then(dbCategoryData => res.json(dbCategoryData))
   .catch(err => {
     res.status(500).json(err);
-  })
+  });
 });
 
 router.put('/:id', (req, res) => {
@@ -70,12 +71,13 @@ router.put('/:id', (req, res) => {
   })
   .then(dbCategoryData => {
     if (!dbCategoryData[0]) {
-      res.status(404).json({messgae: 'No product for this id'})
+      res.status(404).json({messgae: 'No category for this id'})
       return;
     }
     res.json(dbCategoryData);
   })
   .catch(err => {
+    console.log(err);
     res.json(500).json(err);
   });
 });
@@ -89,7 +91,7 @@ router.delete('/:id', (req, res) => {
   }) 
   .then(dbCategoryData => {
     if(!dbCategoryData) {
-      res.status(404).json({message: 'No product for this id'});
+      res.status(404).json({message: 'No category for this id'});
       return;
     }
     res.json(dbCategoryData);
